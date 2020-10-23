@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+html, body{
+  height: 100% !important;
+  height: 100vh !important;
+}
+
+/* .maxContainer{
+  height: 100vh !important;
+  min-height: 100% !important;
+  height: 100% !important;
+  
+} */
