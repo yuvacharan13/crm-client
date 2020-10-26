@@ -26,7 +26,7 @@ const SignIn = ({ setCurrentUser }) => {
         },
         body: JSON.stringify(data),
       }).then((res) => res.json());
-      console.log(user);
+      console.log(user, "user");
       if (user.message === "success") {
         setLoading(false);
 
@@ -36,6 +36,7 @@ const SignIn = ({ setCurrentUser }) => {
         history.push("/dashboard");
       } else {
         setLoading(false);
+        setCurrentUser(user.user)
         setAlert({ display: "flex", message: user.message });
         console.log(user.message);
       }

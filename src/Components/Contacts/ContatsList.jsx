@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Table, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../Redux/User/user-actions";
 
 const ContatsList = () => {
   useEffect(() => {
@@ -18,7 +20,7 @@ const ContatsList = () => {
           console.log(data);
           setContacts(data.contacts);
         } else {
-          setAlert({ display: true, message: data.message });
+          setCurrentUser(null);
         }
       })
       .catch((err) => {
@@ -75,4 +77,13 @@ const ContatsList = () => {
     );
 };
 
-export default ContatsList;
+
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContatsList);

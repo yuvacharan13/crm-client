@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Table, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../Redux/User/user-actions";
 
 const ServiceList = ({ setShow, setData }) => {
   useEffect(() => {
@@ -13,13 +15,12 @@ const ServiceList = ({ setShow, setData }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // Upadte
         setLoading(false);
         if (data.message === "success") {
           console.log(data);
           setService(data.service);
         } else {
-          setAlert({ display: true, message: data.message });
+          setCurrentUser(null);
         }
       })
       .catch((err) => {
@@ -93,4 +94,12 @@ const ServiceList = ({ setShow, setData }) => {
     );
 };
 
-export default ServiceList;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceList);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -12,14 +12,19 @@ import AllowAccess from './Components/Access/AllowAccess';
 import Navbar from "./Components/Navbar/Navbar";
 
 const App = ({currentUser}) => {
+
+  useEffect(() =>{
+    console.log(currentUser);
+  });
+
   return (
     <div>
       <Switch>
         <Route exact path="/signin">
-          { currentUser === null?  <SignIn />  : <Redirect to="/dashboard"> </Redirect> } 
+          { currentUser === null?  <SignIn />  : <Redirect to="/dashboard" /> } 
         </Route>
         <Route exact path="/signup">
-        { currentUser === null?  <SignUp />  : <Navbar Component={Dashboard} /> } 
+        { currentUser === null?  <SignUp />  : <Redirect to="/dashboard" /> } 
         </Route>
         <Route path="/dashboard">
           { currentUser !== null? <Navbar Component={Dashboard} />  : <Redirect to="/signin" /> }

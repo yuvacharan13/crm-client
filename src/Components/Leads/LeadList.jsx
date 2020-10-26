@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Table, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../Redux/User/user-actions";
 
 const LeadList = ({ setData, setShow }) => {
   useEffect(() => {
@@ -13,13 +15,12 @@ const LeadList = ({ setData, setShow }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // Upadte
         setLoading(false);
         if (data.message === "success") {
           console.log(data);
           setLeads(data.leads);
         } else {
-          setAlert({ display: true, message: data.message });
+          setCurrentUser(null);
         }
       })
       .catch((err) => {
@@ -94,4 +95,12 @@ const LeadList = ({ setData, setShow }) => {
     );
 };
 
-export default LeadList;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeadList);
