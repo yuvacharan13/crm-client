@@ -141,7 +141,7 @@ const Navbar = ({ Component, currentUser, setCurrentUser }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("crmApplication");
-    // localStorage.clear();
+    localStorage.removeItem("userDetails");
     setCurrentUser(null);
     // history.push("/signin");
   };

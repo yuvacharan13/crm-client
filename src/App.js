@@ -7,15 +7,15 @@ import SignUp from "./Components/SignUp/SignUp";
 import Contacts from "./Components/Contacts/Contacts";
 import Leads from "./Components/Leads/Leads";
 import Service from "./Components/Services/Service";
-import Dashboard from "./Components/Dashboard/Dashboard";
 import AllowAccess from './Components/Access/AllowAccess';
 import Navbar from "./Components/Navbar/Navbar";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 const App = ({currentUser}) => {
 
-  useEffect(() =>{
-    console.log(currentUser);
-  });
+  // useEffect(() =>{
+  //   console.log(currentUser);
+  // });
 
   return (
     <div>
